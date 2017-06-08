@@ -5,6 +5,7 @@
 let path = require('path');
 let Funnel = require('broccoli-funnel');
 let MergeTrees = require('broccoli-merge-trees');
+let map = require('broccoli-stew').map;
 
 module.exports = {
 
@@ -27,8 +28,17 @@ module.exports = {
     let hammerTree = new Funnel(path.dirname(require.resolve('hammerjs')), {
       files: ['hammer.js']
     });
+    hammerTree = map(hammerTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
 
-    return new MergeTrees([vendorTree, hammerTree]);
+    var trees = [
+      hammerTree
+    ];
+
+    if (vendorTrees) {
+      trees.push(vendorTree);
+    }
+
+    return new MergeTrees(trees);
   },
 
   isDevelopingAddon: function() {
