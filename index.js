@@ -34,7 +34,7 @@ module.exports = {
       hammerTree
     ];
 
-    if (vendorTrees) {
+    if (vendorTree) {
       trees.push(vendorTree);
     }
 
