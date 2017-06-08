@@ -19,9 +19,7 @@ module.exports = {
       app = app.app;
     }
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/hammer.js');
-    }
+    app.import('vendor/hammer.js');
   },
 
   treeForVendor(vendorTree) {
